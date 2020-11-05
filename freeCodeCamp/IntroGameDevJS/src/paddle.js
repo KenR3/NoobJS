@@ -3,7 +3,7 @@
     This class represents the Paddle object the player can control to play the game.
 */
 
-class Paddle {
+export default class Paddle {
 
     constructor(game) {
 

@@ -1,5 +1,8 @@
 
 
+import Game from "/src/game.js";
+
+
 // Grab the canvas HTML element
 let canvas = document.getElementById("gameScreen");
 
@@ -12,7 +15,6 @@ const GAME_HEIGHT = 400;
 
 // Instantiate the game object
 let game = new Game(GAME_WIDTH, GAME_HEIGHT);
-game.start();
 
 // Track the time of the last frame
 let lastTime = 0;
