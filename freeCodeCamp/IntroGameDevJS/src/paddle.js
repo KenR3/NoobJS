@@ -42,7 +42,7 @@ export default class Paddle {
 
     // Method draws the paddle
     draw(ctx){
-        ctx.fillStyle = '#05f';
+        ctx.fillStyle = '#8F0';
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
         ctx.strokeStyle = '#000';
         ctx.strokeRect(this.position.x, this.position.y, this.width, this.height);

@@ -59,7 +59,7 @@ export default class Ball {
         }
 
         // Bouncing off the top
-        if(this.position.y < 0){
+        if(this.position.y < 50){
             this.speed.y = -this.speed.y;
         }
 

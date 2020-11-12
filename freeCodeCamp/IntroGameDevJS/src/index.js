@@ -1,42 +1,51 @@
 
+/*
+    This file performs the basic configuration of the game.
+    This file contains the Game Loop.
+    The Game Loop is used as a callback function by the requestAnimationFrame method.
+    The Game Loop uses the functionality of the 'Game' class.
+*/
 
+
+// Imports
 import Game from "/src/game.js";
 
 
-// Grab the canvas HTML element
-let canvas = document.getElementById("gameScreen");
+// Get the graphics context for drawing to the canvas
+const canvas = document.getElementById("gameScreen");
+const ctx = canvas.getContext('2d');
 
-// Grab the canvas graphics context
-let ctx = canvas.getContext('2d');
-
-// Constant values to hold the size of the canvas
+// Store the size of the canvas
 const GAME_WIDTH = 600;
-const GAME_HEIGHT = 400;
+const GAME_HEIGHT = 450;
+
+// Track the time of frames
+let lastTime = 0;
+let deltaTime = 0;
 
 // Instantiate the game object
-let game = new Game(GAME_WIDTH, GAME_HEIGHT);
-
-// Track the time of the last frame
-let lastTime = 0;
+const game = new Game(GAME_WIDTH, GAME_HEIGHT);
 
 
-// GAME LOOP
+/*
+    This function runs the game; it is called many times per second by the requestAnimationFrame method.
+    The 'timestamp' parameter that is passed to this function is provided by the requestAnimationFrame method.
+*/
 function gameLoop(timestamp) {
 
     // Tracking the amount of time that has passed
-    let deltaTime = timestamp - lastTime;
+    deltaTime = timestamp - lastTime;
     lastTime = timestamp;
 
-    // Clear canvas before drawing
+    // Clear canvas, update, and draw
     ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
-
-    // Update and draw the game
     game.update(deltaTime);
     game.draw(ctx);
 
-    // When the browser is ready, update
+    // Show latest updates per browser refresh rate
     requestAnimationFrame(gameLoop);
 }
 
-// Start the game
+
+// Start the Game Loop
 requestAnimationFrame(gameLoop);
