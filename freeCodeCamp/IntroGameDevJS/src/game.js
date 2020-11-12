@@ -83,62 +83,13 @@ export default class Game {
 
         // Run the game
         this.gamestate = GAMESTATE.RUNNING;
-    }       
-        
-
-    /*
-        This method checks for GAMEOVER, updates all game objects, removes bricks when hit, and checks for level completion.
-    */
-    update(deltaTime) {
-
-        // Check for GAMEOVER state conditions
-        if(this.lives < 1){
-            this.gamestate = GAMESTATE.GAMEOVER;
-        }
-
-        // Check for update skipping conditions
-        if(
-            this.gamestate === GAMESTATE.PAUSED ||
-            this.gamestate === GAMESTATE.MENU ||
-            this.gamestate === GAMESTATE.GAMEOVER ||
-            this.gamestate === GAMESTATE.WINNER
-        ) return;
-
-        // Check for level completion
-        if(this.bricks.length < 1){
-
-            // Increment level array index
-            this.currentLevel++;
-
-            // Check for win
-            if(this.currentLevel >= this.levels.length){
-                this.gamestate = GAMESTATE.WINNER;
-                return;
-            }
-
-            // Set the game state to NEWLEVEL
-            this.gamestate = GAMESTATE.NEWLEVEL;
-
-            // Start the new level
-            this.start();
-        }
-
-        // Put game objects & bricks in one array and update
-        [...this.gameObjects, ...this.bricks].forEach(object => object.update(deltaTime));
-
-        // Remove marked bricks from the array
-        this.bricks = this.bricks.filter(brick => !brick.markedForDeletion);
     }
-
-
-    // Method draws game objects
-    draw(ctx) {
-
-        // Draw background image
-        ctx.drawImage(this.backgroundImage, 0, 0, this.gameWidth, this.gameHeight);
-
-        // Put the game objects & bricks in one array and draw
-        [...this.gameObjects, ...this.bricks].forEach(object => object.draw(ctx));
+    
+    
+    /*
+        This method checks for other game states and draws them accordingly
+    */
+    drawOtherGameState(ctx){
 
         // Drawing the PAUSED state
         if(this.gamestate === GAMESTATE.PAUSED){
@@ -199,6 +150,73 @@ export default class Game {
             ctx.textAlign = "center";
             ctx.fillText("YOU WIN", this.gameWidth / 2, this.gameHeight / 2);
         }
+    }
+        
+
+    /*
+        This method checks for WINNER & GAMEOVER, updates all game objects, removes bricks when hit, and checks for level completion.
+    */
+    update(deltaTime) {
+
+        // Check for GAMEOVER state conditions
+        if(this.lives < 1){
+            this.gamestate = GAMESTATE.GAMEOVER;
+        }
+
+        // Check for update skipping conditions
+        if(
+            this.gamestate === GAMESTATE.PAUSED ||
+            this.gamestate === GAMESTATE.MENU ||
+            this.gamestate === GAMESTATE.GAMEOVER ||
+            this.gamestate === GAMESTATE.WINNER
+        ) return;
+
+        // Check for level completion
+        if(this.bricks.length < 1){
+
+            // Increment level array index
+            this.currentLevel++;
+
+            // Check for win
+            if(this.currentLevel >= this.levels.length){
+                this.gamestate = GAMESTATE.WINNER;
+                return;
+            }
+
+            // Set the game state to NEWLEVEL
+            this.gamestate = GAMESTATE.NEWLEVEL;
+
+            // Start the new level
+            this.start();
+        }
+
+        // Put game objects & bricks in one array and update
+        [...this.gameObjects, ...this.bricks].forEach(object => object.update(deltaTime));
+
+        // Remove marked bricks from the array
+        this.bricks = this.bricks.filter(brick => !brick.markedForDeletion);
+    }
+
+
+    // Method draws game objects
+    draw(ctx) {
+
+        // Draw background image
+        ctx.drawImage(this.backgroundImage, 0, 50, this.gameWidth, this.gameHeight - 50);
+
+        // Put the game objects & bricks in one array and draw
+        [...this.gameObjects, ...this.bricks].forEach(object => object.draw(ctx));
+
+        // Draw UI
+        ctx.rect(0, 0, this.gameWidth, 50);
+        ctx.fillStyle = "black"
+        ctx.font = "38px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText(`LEVEL: ${this.currentLevel + 1}`, 100, 38);
+        ctx.fillText(`LIVES: ${this.lives}`, 500, 38);
+
+        // Draw any other game states
+        this.drawOtherGameState(ctx);
     }
 
     
