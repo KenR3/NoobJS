@@ -78,6 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Array stores the cards the user has matched
     var cardsWon = [];
 
+    // Number of player attempts
+    var playerAttempts = 0;
+
 
     // Function creates the game board
     function createBoard() {
@@ -99,6 +102,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Add each card to the grid element
             grid.appendChild(card);
+
+            // Display the user stats
+            resultDisplay.textContent = `Attempts: ${playerAttempts} || Matches: ${cardsWon.length}`;
         }
     }
 
@@ -123,6 +129,10 @@ document.addEventListener('DOMContentLoaded', () => {
             cards[optionOneId].setAttribute('src', 'images/white.png');
             cards[optionTwoId].setAttribute('src', 'images/white.png');
 
+            // Remove event listeners from matched cards
+            cards[optionOneId].removeEventListener('click', flipCard);
+            cards[optionTwoId].removeEventListener('click', flipCard);
+
             // Add the cards to the cardsWon array
             cardsWon.push(cardsChosen);
         } else {
@@ -130,6 +140,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // Flip cards back over when they do not match
             cards[optionOneId].setAttribute('src', 'images/blank.png');
             cards[optionTwoId].setAttribute('src', 'images/blank.png');
+
+            // Increment the attempts
+            playerAttempts++;
 
             // Inform user of mismatch
             alert('Sorry, try again');
@@ -139,12 +152,12 @@ document.addEventListener('DOMContentLoaded', () => {
         cardsChosen = [];
         cardsChosenId = [];
 
-        // Display the user score (1 point for each match)
-        resultDisplay.textContent = cardsWon.length;
+        // Display the user stats
+        resultDisplay.textContent = `Attempts: ${playerAttempts} Matches: ${cardsWon.length}`;
 
         // Check for all cards matched
         if (cardsWon.length === cardArray.length / 2) {
-            resultDisplay.textContent = 'Congratulations! You found them all!';
+            resultDisplay.textContent = `Congratulations! Your score is: ${cardsWon.length - playerAttempts}`;
         }
     }
 
