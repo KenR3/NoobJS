@@ -1,10 +1,12 @@
 
 /*
-    This class is meant to handle player input, allowing the player to control the paddle
+    This class is meant to handle player input.
+    This class allows the player to move the paddle, pause the game, and start the game.
 */
 
 /*
-    The tutorial uses keyCode, which is deprecated. I changed this to key, and used the returned string in the following switch statements.
+    The tutorial for this game uses 'keyCode', which is deprecated.
+    I changed this to key, and used the returned string in the following switch statements.
 */
 
 export default class InputHandler {
@@ -61,6 +63,4 @@ export default class InputHandler {
             }
         });
     }
-
-
 }

@@ -21,7 +21,6 @@ const GAME_HEIGHT = 450;
 
 // Track the time of frames
 let lastTime = 0;
-let deltaTime = 0;
 
 // Instantiate the game object
 const game = new Game(GAME_WIDTH, GAME_HEIGHT);
@@ -34,7 +33,7 @@ const game = new Game(GAME_WIDTH, GAME_HEIGHT);
 function gameLoop(timestamp) {
 
     // Tracking the amount of time that has passed
-    deltaTime = timestamp - lastTime;
+    let deltaTime = timestamp - lastTime;
     lastTime = timestamp;
 
     // Clear canvas, update, and draw

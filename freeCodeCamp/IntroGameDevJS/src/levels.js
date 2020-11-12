@@ -1,9 +1,12 @@
 
-
+// Imports
 import Brick from "/src/brick.js";
 
 
-// This function builds the levels
+/*
+    This function builds the levels in the game.
+    This implementation seems odd to me, as this could have been a method of the Game class.
+*/
 export function buildLevel(game, level){
 
     // Array to store brick positions
@@ -38,37 +41,9 @@ export const level1 = [
 ]
 
 export const level2 = [
-    // [0, 0, 1, 1, 0, 0, 1, 1, 0, 0],
-    // [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    // [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    // [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-
     [0, 0, 1, 0, 0, 0, 0, 1, 0, 0]
 ]
 
-// export const level3 = [
-//     // [0, 0, 1, 1, 0, 0, 1, 1, 0, 0],
-//     // [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-//     // [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-//     // [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-
-//     [0, 1, 1, 0, 0, 0, 0, 1, 1, 0]
-// ]
-
-// export const level4 = [
-//     // [0, 0, 1, 1, 0, 0, 1, 1, 0, 0],
-//     // [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-//     // [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-//     // [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-
-//     [0, 1, 1, 1, 0, 0, 1, 1, 1, 0]
-// ]
-
-// export const level5 = [
-//     // [0, 0, 1, 1, 0, 0, 1, 1, 0, 0],
-//     // [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-//     // [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-//     // [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-
-//     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-// ]
+export const level3 = [
+    [0, 1, 1, 0, 0, 0, 0, 1, 1, 0]
+]

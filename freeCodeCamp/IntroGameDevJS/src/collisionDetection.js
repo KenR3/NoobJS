@@ -2,7 +2,7 @@
 
 /*
     This function determines whether an object in the game collides with another object.
-    This implementation is strange, it seems this could have jsut been a fuction of the Game class, as we pass it to the other classes anyway.
+    This implementation is strange, it seems this could have just been a fuction of the Game class, as we pass it to the other classes anyway.
 */
 
 export function detectCollision(ball, gameObject){
@@ -25,7 +25,4 @@ export function detectCollision(ball, gameObject){
     } else {
         return false;
     }
-
-
-
 }

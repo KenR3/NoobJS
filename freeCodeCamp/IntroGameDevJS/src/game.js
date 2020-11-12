@@ -4,7 +4,7 @@
 import Paddle from "/src/paddle.js";
 import InputHandler from "/src/input.js"
 import Ball from "/src/ball.js";
-import {buildLevel, level1, level2} from "/src/levels.js";
+import {buildLevel, level1, level2, level3} from "/src/levels.js";
 
 
 // Constants to represent different game states
@@ -50,7 +50,7 @@ export default class Game {
         this.lives = 3;
 
         // Array of game levels
-        this.levels = [level1, level2];
+        this.levels = [level1, level2, level3];
 
         // Initialize level tracking (the number is the array index)
         this.currentLevel = 0;
@@ -72,14 +72,14 @@ export default class Game {
         // Use the imported function to build the level
         this.bricks = buildLevel(this, this.levels[this.currentLevel]);
 
-        // Reset the ball
-        this.ball.reset();
-
         // Array of game objects
         this.gameObjects = [
             this.paddle, 
             this.ball
         ];
+
+        // Reset the ball
+        this.ball.reset();
 
         // Run the game
         this.gamestate = GAMESTATE.RUNNING;
@@ -100,7 +100,7 @@ export default class Game {
             ctx.fill();
 
             // Add text to screen
-            ctx.font = "48px Arial";
+            ctx.font = "68px Impact";
             ctx.fillStyle = "white";
             ctx.textAlign = "center";
             ctx.fillText("Game Paused", this.gameWidth / 2, this.gameHeight / 2);
@@ -114,11 +114,18 @@ export default class Game {
             ctx.fillStyle = "rgba(0, 0, 0, 1)";
             ctx.fill();
 
+            // Draw background image
+            ctx.drawImage(this.backgroundImage, 0, 50, this.gameWidth, this.gameHeight - 50);
+
             // Add text to screen
-            ctx.font = "30px Arial";
-            ctx.fillStyle = "white";
+            ctx.font = "48px Impact";
+            ctx.fillStyle = "#0F0";
             ctx.textAlign = "center";
-            ctx.fillText("Press SPACEBAR To Start", this.gameWidth / 2, this.gameHeight / 2);
+            ctx.fillText("-BRICK BREAKER-", this.gameWidth / 2, this.gameHeight / 4);
+            ctx.font = "30px Arial";
+            ctx.fillText("Press 'space' to Start", this.gameWidth / 2, this.gameHeight / 2);
+            ctx.fillText("Press 'escape' to Pause", this.gameWidth / 2, this.gameHeight / 1.4);
+            ctx.fillText("Use Arrow keys to move the Paddle", this.gameWidth / 2, this.gameHeight / 1.1);
         }
 
         // Drawing the GAMEOVER state
@@ -129,9 +136,12 @@ export default class Game {
             ctx.fillStyle = "rgba(0, 0, 0, 1)";
             ctx.fill();
 
+            // Draw background image
+            ctx.drawImage(this.backgroundImage, 0, 50, this.gameWidth, this.gameHeight - 50);
+
             // Add text to screen
-            ctx.font = "48px Arial";
-            ctx.fillStyle = "white";
+            ctx.font = "68px Impact";
+            ctx.fillStyle = "#0F0";
             ctx.textAlign = "center";
             ctx.fillText("GAME OVER", this.gameWidth / 2, this.gameHeight / 2);
         }
@@ -144,9 +154,12 @@ export default class Game {
             ctx.fillStyle = "rgba(0, 0, 0, 1)";
             ctx.fill();
 
+            // Draw background image
+            ctx.drawImage(this.backgroundImage, 0, 50, this.gameWidth, this.gameHeight - 50);
+
             // Add text to screen
-            ctx.font = "48px Arial";
-            ctx.fillStyle = "white";
+            ctx.font = "98px Impact";
+            ctx.fillStyle = "#0F0";
             ctx.textAlign = "center";
             ctx.fillText("YOU WIN", this.gameWidth / 2, this.gameHeight / 2);
         }
@@ -201,17 +214,20 @@ export default class Game {
     // Method draws game objects
     draw(ctx) {
 
+        // Fill the screen with black
+        ctx.rect(0, 0, this.gameWidth, this.gameHeight);
+        ctx.fillStyle = "rgba(0, 0, 0, 1)";
+        ctx.fill();
+
         // Draw background image
         ctx.drawImage(this.backgroundImage, 0, 50, this.gameWidth, this.gameHeight - 50);
 
         // Put the game objects & bricks in one array and draw
         [...this.gameObjects, ...this.bricks].forEach(object => object.draw(ctx));
 
-        // Draw UI
-        ctx.rect(0, 0, this.gameWidth, 50);
-        ctx.fillStyle = "black"
+        // Draw HUD
         ctx.font = "38px Arial";
-        ctx.fillStyle = "black";
+        ctx.fillStyle = "#0F0";
         ctx.fillText(`LEVEL: ${this.currentLevel + 1}`, 100, 38);
         ctx.fillText(`LIVES: ${this.lives}`, 500, 38);
 

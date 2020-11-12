@@ -3,6 +3,7 @@ import {detectCollision} from "/src/collisionDetection.js";
 
 /*
     This class represents the ball that bounces about the screen while playing the game.
+    This class handles the collisions between the ball and the boundaries, and the ball and the paddle, but it does not handle the collisions between the ball and the bricks, which seems an odd implementation to me.
 */
 
 export default class Ball {

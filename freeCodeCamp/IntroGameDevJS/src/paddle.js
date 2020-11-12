@@ -1,8 +1,8 @@
 
 /*
     This class represents the Paddle object the player can control to play the game.
+    This class tracks the Paddle movement and collision with boundaries.
 */
-
 export default class Paddle {
 
     constructor(game) {

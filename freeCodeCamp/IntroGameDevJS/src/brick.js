@@ -1,10 +1,10 @@
 
+// Imports
 import {detectCollision} from "/src/collisionDetection.js";
 
 /*
     This class represents the bricks that will be destroyed by the ball in the game
 */
-
 export default class Brick {
 
     constructor(game, position){
