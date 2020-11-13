@@ -14,6 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Init player tracker
     let currentPlayer = 1;
 
+    // Init game over tracker
+    let gameIsOver = false;
+
 
     // Iterate all game squares, handle player clicks on them
     for (var i = 0; i < squares.length; i++) {
@@ -24,12 +27,16 @@ document.addEventListener('DOMContentLoaded', () => {
             // Add a click event handler to each square in the game grid
             squares[i].onclick = function() {
 
+                // Check for game over status
+                if (gameIsOver) return;
+
                 // Stacking on top if square is taken
                 if (squares[index + 7].classList.contains('taken')) {
 
                     if (currentPlayer === 1) {
 
                         // Mark game square for player 1
+                        squares[index].classList.remove('no-player');
                         squares[index].classList.add('taken');
                         squares[index].classList.add('player-one');
 
@@ -40,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     } else if (currentPlayer === 2) {
 
                         // Mark game square for player 2
+                        squares[index].classList.remove('no-player');
                         squares[index].classList.add('taken');
                         squares[index].classList.add('player-two');
 
@@ -60,7 +68,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function checks the board for win or lose
     function checkBoard() {
 
-        // Array of winning token placement combinations
+        // Check for game over status
+        if (gameIsOver) return;
+
+        // Array of winning token placement combination arrays
         const winningArrays = [
             [0, 1, 2, 3],
             [41, 40, 39, 38],
@@ -150,6 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Player 1 wins
                 result.innerHTML = 'Player One Wins!';
+                gameIsOver = true;
 
             } else if (
             square1.classList.contains('player-two') &&
@@ -159,6 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Player 2 wins
                 result.innerHTML = 'Player Two Wins!';
+                gameIsOver = true;
             }
         }
     }
