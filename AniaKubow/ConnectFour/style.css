@@ -1,0 +1,31 @@
+
+
+/* Configure the game grid */
+.grid {
+    border: 1px solid;
+    display: flex;
+    flex-wrap: wrap;
+    height: 120px;
+    width: 140px;
+}
+
+
+/* Configure the game board */
+.grid div {
+    height: 20px;
+    width: 20px;
+}
+
+
+/* Player one has red tokens */
+.player-one {
+    background-color: red;
+    border-radius: 10px;
+}
+
+
+/* Player two has blue tokens */
+.player-two {
+    background-color: blue;
+    border-radius: 10px;
+}
