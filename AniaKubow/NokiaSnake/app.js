@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Track player score
     let score = 0;
 
-    // Multiplier used to reduce the interval, thus increasing the snake speed
+    // Multiplier used to reduce the intervalTime, thus increasing the snake speed
     let speed = 0.9;
 
     // Tracks the snake speed
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Reset score & display
         score = 0
-        scoreDisplay.innerText = score;
+        scoreDisplay.innerText = `Apples: ${score}`;
 
         // Call apple spawning function
         randomApple();
@@ -91,8 +91,11 @@ document.addEventListener('DOMContentLoaded', () => {
         (currentSnake[0] - width < 0 && direction === -width) ||  // Top
         squares[currentSnake[0] + direction].classList.contains('snake')  // Self
         ){
+            
+            // Display final score text
+            scoreDisplay.innerText = `Game Over! Total Apples: ${score}`;
 
-            // Clear the interval - stops the game???
+            // Clear the interval - Stop the game
             return clearInterval(interval);
         }
 
@@ -116,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Increment player score & display
             score++;
-            scoreDisplay.textContent = score;
+            scoreDisplay.textContent = `Apples: ${score}`;
 
             // Increase the snake speed by multiplying the interval and speed
             clearInterval(interval);
