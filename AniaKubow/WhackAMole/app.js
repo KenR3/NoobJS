@@ -6,18 +6,17 @@ const square = document.querySelectorAll('.square');
 // Grab any divs that have the mole class
 const mole = document.querySelectorAll('.mole');
 
-// Grab the game time tracking element
-const timeLeft = document.querySelector('#time-left');
+// Grab the game heads up display element
+const HUD = document.querySelector('#hud');
 
-// Grab the game score tracking element
-// Unsure why this variable uses let while the above uses const
-let score = document.querySelector('#score');
-
-// Track the player score
+// Track the number of successful player whacks
 let result = 0;
 
 // Track the game timer
-let currentTime = timeLeft.textContent;
+let currentTime = 10;
+
+// Track Game Over status
+let gameIsOver = false;
 
 
 // This function places the mole at a random location in the grid
@@ -26,7 +25,11 @@ function randomSquare() {
     // Clear all squares by removing class name
     square.forEach(className => {
         className.classList.remove('mole');
+        className.classList.remove('moleCry');
     })
+
+    // Check for Game Over status
+    if (gameIsOver) return;
 
     // Set the random square the mole will appear in next
     let randomPosition = square[Math.floor(Math.random() * 9)]
@@ -39,16 +42,23 @@ function randomSquare() {
 }
 
 
-// Loop the squares and check for player hitting the mole
+// Loop the squares, add a listener, check for whacks
 square.forEach(id => {
     
     // Add mouseUp listener to track clicks
     id.addEventListener('mouseup', () => {
 
-        // If the square contains the mole, increment the score
-        if (id.id === hitPosition) {
+        // Check for proper mole whacking conditions
+        if (id.id === hitPosition &&
+            !(id.classList.contains('moleCry')) &&
+            !(gameIsOver)) {
+
+            // Increment player score
             result = result + 1;
-            score.textContent = result;
+
+            // Alter mole image via class manipulation
+            id.classList.remove('mole');
+            id.classList.add('moleCry');
         }
     })
 })
@@ -70,15 +80,19 @@ moveMole();
 // Function handles the game timer
 function countDown() {
 
-    // Decrement the timer and display
+    // Decrement the timer
     currentTime--;
-    timeLeft.textContent = currentTime;
+    HUD.textContent = `Whacks: ${result} || Time: ${currentTime}`;
 
     // Check for out of time
     if (currentTime === 0) {
         clearInterval(timerId);
         alert('GAME OVER! Your final whack tally is: ' + result);
+        
+        // Mark game as over
+        gameIsOver = true;
     }
+
 }
 
 

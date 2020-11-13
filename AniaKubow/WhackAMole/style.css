@@ -1,11 +1,11 @@
 
-
 /* Configure each sqaure in the game grid */
 .square {
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     border-style: solid;
-    border-color: black;
+    border-color: brown;
+    background-color: burlywood;
 }
 
 /* Configure the grid to be 3 x 3 squares */
@@ -14,12 +14,41 @@
     flex-flow: row wrap;
     justify-content: center;
     align-content: center;
-    width: 618px;
-    height: 618px;
+    width: 318px;
+    height: 318px;
+    margin: auto;
 }
 
 /* Configure the mole image */
 .mole {
     background-image: url('mole.png');
     background-size: cover;
+}
+
+/* Configure the moleCry image */
+.moleCry {
+    background-image: url('moleCry.png');
+    background-size: cover;
+}
+
+#title {
+    text-align: center;
+    color: blue;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+#hud {
+    text-align: center;
+    color: blue;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.body {
+    background-color: black;
+}
+
+#info {
+    text-align: center;
+    color: blue;
+    font-family: Arial, Helvetica, sans-serif;
 }
